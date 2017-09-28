@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<package version="2.0" unique-identifier="PrimaryID" mlns="http://www.idpf.org/2007/opf">
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+<dc:title>{{bookname}}</dc:title>
+<dc:identifier opf:scheme="ISBN"></dc:identifier>
+<dc:language>zh</dc:language>
+<dc:creator>{{author}}</dc:creator>
+<dc:publisher>{{publisher}}</dc:publisher>
+<dc:description></dc:description>
+<dc:coverage></dc:coverage>
+<dc:source>{{source}}</dc:source>
+<dc:date>{{date}}</dc:date>
+<dc:rights>{{rights}}</dc:rights>
+<dc:subject>{{subject}}</dc:subject>
+<dc:contributor></dc:contributor>
+<dc:type>epub</dc:type>
+<dc:format></dc:format>
+<dc:relation></dc:relation>
+<dc:builder>pythonepub</dc:builder>
+<dc:builder_version>1.0</dc:builder_version>
+<meta name="cover" content="cover-image"/>
+</metadata>
+<manifest>
+    <!-- Content Documents -->
+    <item id="main-css" href="css/main.css" media-type="text/css"/>
+    <item id="coverpage"  href="coverpage.html"  media-type="application/xhtml+xml"/>
+    {% for chapter in chapterList %}
+    <item id="chapter{{chapter.index}}"  href="chapter{{chapter.index}}.html"  media-type="application/xhtml+xml"/>
+    {% endfor %}
+    <item id="ncx"  href="fb.ncx" media-type="application/x-dtbncx+xml"/>
+    <item id="css" href="css/main.css" media-type="text/css"/>
+    <item id="cover-image" href="images/cover.jpg" media-type="image/jpeg"/>
+</manifest> 
+<spine toc="ncx">
+    <itemref idref="coverpage" linear="yes"/>
+    {% for chapter in chapterList %}
+    <itemref idref="chapter{{chapter.index}}" linear="yes"/>
+    {% endfor %}
+</spine> 
+<guide>
+    <reference type="cover" title="Cover"  href="coverpage.html"/>
+    {% for chapter in chapterList %}
+    <reference type="text" title="{{chapter.title}}"  href="chapter{{chapter.index}}.html"/>
+    {% endfor %}
+</guide>
+</package> 
